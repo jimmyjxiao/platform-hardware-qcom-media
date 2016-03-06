@@ -4,6 +4,9 @@ ROOT_DIR := $(call my-dir)
 
 include $(CLEAR_VARS)
 LOCAL_PATH:= $(ROOT_DIR)
+LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
+LOCAL_C_INCLUDES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+
 
 # ---------------------------------------------------------------------------------
 # 				Common definitons
@@ -51,23 +54,23 @@ libOmxVdec-def += -DUSE_ION
 include $(CLEAR_VARS)
 LOCAL_PATH:= $(ROOT_DIR)
 
-libmm-vdec-inc          := $(LOCAL_PATH)/vdec/inc
-libmm-vdec-inc          += $(OMX_VIDEO_PATH)/vidc/common/inc
-libmm-vdec-inc          += hardware/qcom/media/mm-core/inc
+LOCAL_C_INCLUDES          := $(LOCAL_PATH)/vdec/inc
+LOCAL_C_INCLUDES          += $(OMX_VIDEO_PATH)/vidc/common/inc
+LOCAL_C_INCLUDES          += hardware/qcom/media/mm-core/inc
 #DRM include - Interface which loads the DRM library
-libmm-vdec-inc	        += $(OMX_VIDEO_PATH)/DivxDrmDecrypt/inc
-libmm-vdec-inc	        += $(TARGET_OUT_HEADERS)/qcom/display
-libmm-vdec-inc	        += $(TARGET_OUT_HEADERS)/adreno
-libmm-vdec-inc	        += $(TARGET_OUT_HEADERS)/adreno200
-libmm-vdec-inc          += frameworks/native/include/media/openmax
-libmm-vdec-inc          += frameworks/native/include/media/hardware
-libmm-vdec-inc          += hardware/qcom/media/libc2dcolorconvert
-libmm-vdec-inc          += frameworks/av/include/media/stagefright
+LOCAL_C_INCLUDES        += $(OMX_VIDEO_PATH)/DivxDrmDecrypt/inc
+LOCAL_C_INCLUDES        += $(TARGET_OUT_HEADERS)/qcom/display
+LOCAL_C_INCLUDES       += $(TARGET_OUT_HEADERS)/adreno
+LOCAL_C_INCLUDES        += $(TARGET_OUT_HEADERS)/adreno200
+LOCAL_C_INCLUDES      += frameworks/native/include/media/openmax
+LOCAL_C_INCLUDES        += frameworks/native/include/media/hardware
+LOCAL_C_INCLUDES         += hardware/qcom/media/libc2dcolorconvert
+LOCAL_C_INCLUDES         += frameworks/av/include/media/stagefright
 
 LOCAL_MODULE                    := libOmxVdec
 LOCAL_MODULE_TAGS               := optional
 LOCAL_CFLAGS                    := $(libOmxVdec-def)
-LOCAL_C_INCLUDES                += $(libmm-vdec-inc)
+
 
 LOCAL_SHARED_LIBRARIES  := liblog libutils libbinder libcutils libdl
 
@@ -82,7 +85,8 @@ LOCAL_SRC_FILES         += vdec/src/mp4_utils.cpp
 LOCAL_SRC_FILES         += vdec/src/omx_vdec.cpp
 LOCAL_SRC_FILES         += common/src/extra_data_handler.cpp
 LOCAL_SRC_FILES         += common/src/vidc_color_converter.cpp
-
+LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
+LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 include $(BUILD_SHARED_LIBRARY)
 
 # ---------------------------------------------------------------------------------

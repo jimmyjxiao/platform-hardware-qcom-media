@@ -42,7 +42,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <sys/poll.h>
 #include <stdint.h>
 
-#include "frameparser.h"
+#include "../inc/frameparser.h"
 
 #ifdef _ANDROID_
     extern "C"{
